@@ -31,12 +31,40 @@
 
 <div id="app">
   <h2>1. 双大括号表达式</h2>
+  <p>{{content}}</p>
+  <p>{{content.toUpperCase()}}</p>
 
   <h2>2. 指令一: 强制数据绑定</h2>
+  <a href="url">去培训</a><br>
+  <a v-bind:href="url">去培训</a><br>
+  <a :href="url">去培训</a><br>
 
   <h2>3. 指令二: 绑定事件监听</h2>
+  <button v-on:click="test1">aaaaaa</button>
+  <button @click="test1">aaaaaa</button>
 
 </div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  const vm = new Vue({
+    el: '#app',
+    data: {// vm中也会定义对应的属性
+      content: 'I Will Back!',
+      url: 'http://www.atguigu.com'
+    },
+    methods: { // 都会在为vm方法
+      test1 (event) {
+        alert(event.target.textContent)
+      }
+    }
+  })
+
+  vm.url = 'http://www.jd.com'
+  // vm._data.url = 'xxx'
+  console.log(vm, vm.url)
+
+</script>
 
 </body>
 </html>

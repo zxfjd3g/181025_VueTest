@@ -26,7 +26,46 @@
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  // Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性
+  var p = {
+    firstName: 'A',
+    lastName: 'B'
+  }
+  /*
+  给p添加一个属性: fullName: firstName-lastName
+  如果改变firstName/lastName, fullName也同步变化
+  如果改变了fullName, firstName/lastName也同步变化
+   */
+  // p.fullName = p.firstName + '-' + p.lastName  // 不种添加属性的方式不可以
+  Object.defineProperty(p, 'fullName', { // 配置对象  属性描述符
+    // 当读取属性值时自动调用, get()返回值作为属性值, this是读取属性的当前对象
+    get () {
+      console.log('get()')
+      return this.firstName + '-' + this.lastName
+    },
+    // 当属性值发了改变自动调用, 监视属性值的改变, this是设置属性的当前对象
+    set (value) { // fullName最新的值
+      const names = value.split('-')
+      this.firstName = names[0]
+      this.lastName = names[1]
+    }
+  })
 
+
+  console.log(p.fullName)
+  p.firstName = 'C'
+  p.lastName = 'D'
+  console.log(p.fullName) // C-D
+  p.fullName = 'E-F'
+  console.log(p.firstName, p.lastName) // E F
+
+/*
+回调函数的3个问题?
+1. 什么时候调用?
+2. 用来做什么?
+3. this是谁?
+ */
+  
 </script>
 </body>
 </html>
