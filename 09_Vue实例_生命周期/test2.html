@@ -12,14 +12,14 @@
     * created()
     * beforeMount()
     * mounted()
-  2). 更新状态
+  2). 更新状态: this.xxx = value
     * beforeUpdate()
     * updated()
-  3). 销毁vue实例: vm.$destory()
-    * beforeDestory()
-    * destoryed()
+  3). 销毁vue实例: vm.$destroy()
+    * beforeDestroy()
+    * destroyed()
 2. 常用的生命周期方法
-  created()/mounted(): 发送ajax请求, 启动定时器等异步任务
+  mounted(): 发送ajax请求, 启动定时器等异步任务
   beforeDestory(): 做收尾工作, 如: 清除定时器
 -->
 
@@ -43,8 +43,25 @@
       }
     },
 
+    /*
+    create
+    mount
+    update
+    destroy
+     */
+    beforeCreate () {
+      console.log('beforeCreate()')
+    },
+    created () {
+      console.log('created()')
+    },
+    beforeMount () {
+      console.log('beforeMount()')
+    },
+
     // 在页面第一次显示之后自动调用, 启动异步任务(定时器, ajax请求, 绑定自定义监听)
     mounted () {
+      console.log('mounted()')
       // 启动循环定时器
       this.intervalId = setInterval(() => {
         console.log('-----')
@@ -52,9 +69,22 @@
       }, 1000)
     },
 
+    beforeUpdate () {
+      console.log('beforeUpdate()')
+    },
+    updated () {
+      console.log('updated()')
+    },
+
+
     // 在vm被销毁之前调用, 做一些收尾的工作(比如: 清除定时器)
     beforeDestroy() {
+      console.log('beforeDestroy()')
       clearInterval(this.intervalId)
+    },
+
+    destroyed () {
+      console.log('destroyed()')
     }
   })
 

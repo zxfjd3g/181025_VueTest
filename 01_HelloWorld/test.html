@@ -25,6 +25,9 @@ js在模板存在的形式?
 <div id="test">
   <input type="text" v-model="msg">
   <p>Hello, {{msg}}</p>
+  <p>Hello, {{msg}}</p>
+  <p>Hello, {{msg}}</p>
+  <p>Hello, {{msg}}</p>
 </div>
 
 <p>{{msg}}</p>
@@ -32,11 +35,13 @@ js在模板存在的形式?
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
   var vm = new Vue({ // 配置对象: 属性名是一些特定的名称
-    el: '#test',  // element, 值是选择器(用于找到模板根标签), 只解析模板区域
+    // el: '#test',  // element, 值是选择器(用于找到模板根标签), 只解析模板区域
     data: { // 包含n个数据的对象, 为模板提供数据
       msg: 'atguigu222'
     }
   })
+
+  vm.$mount('#test')
 
   // 将函数作为对象使用时，称为"函数对象"
   Vue.test = function () {
